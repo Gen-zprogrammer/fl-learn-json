@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'data.g.dart';
 
+@JsonSerializable()
 class Data {
   final int id;
   final String email;
@@ -17,6 +18,9 @@ class Data {
     required this.avatar,
   });
 
-  factory Data.fromMap(Map<String, dynamic> data) =>
-      _$DataFromJson(data);
+//Map => model
+  factory Data.fromJson(Map<String, dynamic> json) => _$DataFromJson(json);
+
+// model => Map
+  Map<String, dynamic> toJson() => _$DataToJson(this);
 }

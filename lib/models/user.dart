@@ -1,23 +1,21 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:learn_json/models/support.dart';
 import './data.dart';
+import './support.dart';
 
 part 'user.g.dart';
 
 // part 'user' tsb harus sesuai nama file
 // jnlp run dgn flutter pub run build_runner build
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
+class UserModel {
+  final Data data;
+  final Support support;
 // class UserModel {
 //   final int id;
 //   final String email;
 //   final String first_name;
 //   final String last_name;
 //   final String avatar;
-
-  class UserModel {
-  final Data data;
-  final Support support;
-  
 
   // Jika ingin menambahkan bnyk data tinggal bkin lg dan build runner ulang
   // final int id2;
@@ -41,8 +39,11 @@ part 'user.g.dart';
     // required this.avatar2,
   });
 
-  factory UserModel.fromMap(Map<String, dynamic> data) =>
-      _$UserModelFromJson(data);
+  factory UserModel.fromJson(Map<String, dynamic> json) =>
+      _$UserModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UserModelToJson(this);
+
   // factory UserModel.fromMap(Map<String, dynamic> data) {
   //   return UserModel(
   //       id: data['id'],

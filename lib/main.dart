@@ -36,8 +36,8 @@ class HomePage extends StatelessWidget {
     } else {
       print(response.body);
       Map<String, dynamic> data =
-          (jsonDecode(response.body) as Map<String, dynamic>)['data'];
-      return UserModel.fromMap(data);
+          (jsonDecode(response.body) as Map<String, dynamic>);
+      return UserModel.fromJson(data);
     }
   }
 
@@ -71,13 +71,24 @@ class HomePage extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 50,
-                      backgroundImage: NetworkImage(snapshot.data!.avatar),
+                      backgroundImage: NetworkImage(snapshot.data!.data.avatar),
                     ),
-                    Text('ID: ${snapshot.data!.id}'),
-                    Text('Email: ${snapshot.data!.email}'),
+                    Text('ID: ${snapshot.data!.data.id}'),
+                    Text('Email: ${snapshot.data!.data.email}'),
                     Text(
-                      'Name: ${snapshot.data!.first_name} ${snapshot.data!.last_name}',
+                      'Name: ${snapshot.data!.data.first_name} ${snapshot.data!.data.last_name}',
                     ),
+                    const SizedBox(
+                      height: 30.0,
+                    ),
+                    Text('URL: ${snapshot.data!.support.url}'),
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Text(
+                        'Text: ${snapshot.data!.support.text}',
+                        textAlign: TextAlign.center,
+                      ),
+                    )
                   ],
                 ),
                 // child: Text('${snapshot.data!['data']['email']}'),
@@ -93,5 +104,3 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-
-

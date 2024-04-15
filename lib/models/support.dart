@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'support.g.dart';
 
+@JsonSerializable()
 class Support {
   final String url;
   final String text;
@@ -11,5 +12,9 @@ class Support {
     required this.text,
   });
 
-  factory Support.fromMap(Map<String, dynamic> data) => _$Support(data);
+  factory Support.fromJson(Map<String, dynamic> json) =>
+      _$SupportFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SupportToJson(this);
+
 }
